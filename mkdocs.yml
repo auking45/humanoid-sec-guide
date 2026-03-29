@@ -12,7 +12,6 @@ theme:
       primary: indigo
       accent: blue
   features:
-    - navigation.tabs # Enable top navigation tabs
     - navigation.sections # Organize sidebar into sections
     - content.code.copy # Add copy button to code blocks
 
@@ -46,6 +45,21 @@ plugins:
           name: English
         - locale: ko
           name: 한국어
+          nav_translations:
+            Home: 홈
+            1. Hardware Security: 1. 하드웨어 보안
+            Overview: 개요
+            TrustZone & TPM: TrustZone 및 TPM
+            2. Network Security: 2. 네트워크 보안
+            Cloud (mTLS 1.3): 클라우드 (mTLS 1.3)
+            Local Network (UPC-RPC): 로컬 네트워크 (UPC-RPC)
+            3. System SW Security: 3. 시스템 SW 보안
+            Real-time Auditing: 실시간 감사
+            Secure Logging: 보안 로깅
+            4. Application Security: 4. 애플리케이션 보안
+            Control Integrity: 제어 무결성
+            Data Privacy: 데이터 프라이버시
+            Compliance Checklist: 컴플라이언스 체크리스트
 
 # Markdown Extensions
 markdown_extensions:
