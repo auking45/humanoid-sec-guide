@@ -1,0 +1,55 @@
+site_name: Humanoid Security Guide (HSG)
+site_description: Technical Security Specification for High-End Humanoid Robots based on the KISA 2025 Model.
+site_author: Jinha
+site_url: https://auking45.github.io/humanoid-sec-guide/
+
+# UI/UX Theme Configuration
+theme:
+  name: material
+  language: en
+  palette:
+    - scheme: slate # Dark mode for a professional security look
+      primary: indigo
+      accent: blue
+  features:
+    - navigation.tabs # Enable top navigation tabs
+    - navigation.sections # Organize sidebar into sections
+    - content.code.copy # Add copy button to code blocks
+
+# Navigation Structure (Aligned with KISA 4-domain model)
+nav:
+  - Home: index.md
+  - 1. Hardware Security:
+      - Overview: hardware/overview.md
+      - TrustZone & TPM: hardware/trustzone_tpm.md
+  - 2. Network Security:
+      - Cloud (mTLS 1.3): network/cloud_comm.md
+      - Local Network (UPC-RPC): network/local_net.md
+  - 3. System SW Security:
+      - Real-time Auditing: system/audit_setup.md
+      - Secure Logging: system/logging.md
+  - 4. Application Security:
+      - Control Integrity: app/control_integrity.md
+      - Data Privacy: app/privacy.md
+  - Compliance Checklist: checklist.md
+
+# Plugins Configuration
+plugins:
+  - search
+  - autorefs
+  - glightbox
+  - i18n:
+      docs_structure: folder
+      languages:
+        - locale: en
+          default: true
+          name: English
+        - locale: ko
+          name: 한국어
+
+# Markdown Extensions
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - tables
