@@ -1,0 +1,23 @@
+# 4.1.1. SSDF Checklist
+
+| ID | Checklist Item | Description |
+| :--- | :--- | :--- |
+| SSDF-01 | Define Software Development<br>Security Requirements | Security requirements for the software development infrastructure, processes, products, and external components must be defined, documented, and regularly reviewed and updated. |
+| SSDF-02 | Manage Security Roles and Responsibilities | Security-related roles and responsibilities must be clearly defined and periodically reviewed at all stages of the SDLC, and appropriate training must be provided to personnel performing these roles. |
+| SSDF-03 | Manage Security Development Toolchain | The development and security toolchain used at each stage of the SDLC must be defined, integrated, and operated to ensure automated security verification and audit traceability. |
+| SSDF-04 | Define Security Check<br>Criteria and Manage Data | Security check criteria must be defined for the entire software development lifecycle, and the security check results produced according to these criteria must be securely collected and protected. |
+| SSDF-05 | Protect Development Environment | Each environment, including software development, build, testing, and deployment, and all its components must be hardened to be protected from internal and external threats. |
+| SSDF-06 | Prevent Unauthorized Code<br>Access and Tampering | All forms of code, including source code, executables, and configuration scripts, must be protected from unauthorized access and tampering, and the principle of least privilege must be applied so that only authorized personnel, tools, and services can access them. |
+| SSDF-07 | Provide Software Distribution<br>Integrity Verification | When distributing or providing software, verification information such as hash values or digital signatures must be provided so that the recipient can verify the integrity of the distribution files. |
+| SSDF-08 | Store and Protect<br>Software Distributions | Software distribution files and related data must be securely stored, and the origin and change history of the components included in each distribution must be managed for traceability. |
+| SSDF-09 | Establish Secure Design and<br>Risk Mitigation Framework | A design framework must be established that reflects security requirements during the software design phase and identifies and mitigates potential security risks through threat modeling and risk analysis. |
+| SSDF-10 | Perform Secure Design Review | It must be checked whether the software design meets security requirements and appropriately mitigates identified security risks through an independent reviewer or automated verification procedures. |
+| SSDF-11 | Reuse Verified Libraries | Reusing externally or internally verified secure software components should reduce redundant development and minimize the risk of introducing new security vulnerabilities. |
+| SSDF-12 | Adhere to Secure Coding<br>Guidelines | Vulnerabilities in the source code must be minimized by adhering to secure coding guidelines. |
+| SSDF-13 | Securely Configure Compiler<br>and Build Environment | Security at the executable level must be enhanced by applying security settings for compilers, interpreters, and build tools. |
+| SSDF-14 | Review and Analyze Code | Code review and static analysis procedures must be established to identify and manage security vulnerabilities. |
+| SSDF-15 | Test Executable Code | Test criteria for executable code must be defined, tests must be performed according to the defined procedures, and the results must be managed. |
+| SSDF-16 | Configure Secure Initial<br>Security Settings | Secure default settings must be defined for software installation and initial configuration, and these must be applied in the actual environment to maintain a secure state during operation. |
+| SSDF-17 | Identify and Manage<br>Vulnerabilities | Vulnerability information for the robot system and connected software components must be continuously collected, the impact of identified vulnerabilities must be verified and analyzed, and prompt action must be taken through disclosure and response procedures. |
+| SSDF-18 | Take Priority-Based Actions | The risk of identified vulnerabilities in the robot system must be analyzed, and appropriate actions must be planned and implemented according to the risk level. |
+| SSDF-19 | Analyze Root Cause of<br>Vulnerabilities | The root cause of vulnerabilities that have occurred in the robot system must be analyzed, and preventive measures and process improvements must be implemented to prevent the recurrence of the same type of vulnerability. |

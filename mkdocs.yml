@@ -31,7 +31,19 @@ nav:
   - 4. Application Security:
       - Control Integrity: app/control_integrity.md
       - Data Privacy: app/privacy.md
-  - Compliance Checklist: checklist.md
+  - Compliance Checklist:
+      - Overview: checklist.md
+      - 1. SSDF: checklist/ssdf.md
+      - 2. Supply Chain: checklist/supply_chain.md
+      - 3. Identification & Auth: checklist/ia.md
+      - 4. Use Control: checklist/uc.md
+      - 5. System Integrity: checklist/si.md
+      - 6. Data Protection: checklist/dp.md
+      - 7. Data Flow Restriction: checklist/dfr.md
+      - 8. Event Response: checklist/er.md
+      - 9. Resource Availability: checklist/ra.md
+      - 10. Cyber Resilience: checklist/cr.md
+      - 11. Wireless Security: checklist/ws.md
 
 # Plugins Configuration
 plugins:
@@ -62,6 +74,17 @@ plugins:
             Control Integrity: 제어 무결성
             Data Privacy: 데이터 프라이버시
             Compliance Checklist: 컴플라이언스 체크리스트
+            "1. SSDF": "1. SSDF"
+            "2. Supply Chain": "2. 공급망 보안"
+            "3. Identification & Auth": "3. 식별 및 인증"
+            "4. Use Control": "4. 사용 통제"
+            "5. System Integrity": "5. 시스템 무결성"
+            "6. Data Protection": "6. 데이터 보호"
+            "7. Data Flow Restriction": "7. 데이터 흐름 제한"
+            "8. Event Response": "8. 이벤트 대응"
+            "9. Resource Availability": "9. 자원 가용성"
+            "10. Cyber Resilience": "10. 사이버 복원력"
+            "11. Wireless Security": "11. 무선 보안"
 
 # Markdown Extensions
 markdown_extensions:
