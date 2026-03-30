@@ -1,0 +1,17 @@
+# 4.2.2. Network Security Requirements
+
+These are security requirements to protect robot network communications, responding to the network threats identified in Chapter 3. The detailed security requirements are as follows.
+
+| Security Requirement | Mitigation Measure | Checklist ID (Vulnerability Check) | Security Solution |
+| :--- | :--- | :--- | :--- |
+| **Ensure Communication Reliability** | Protect tampered data and communications with signature-based integrity verification. | `[SI-01]` Communication integrity | IoT Security Gateway |
+| **Packet Verification** | Protect against abnormal command frames and data packets with input validation. | `[SI-05]` Input validation<br>`[SI-07]` Error handling<br>`[WS-22]` External input management | Industrial IPS,<br>Industrial Firewall,<br>Industrial IDS,<br>IoT Security Gateway |
+| **Protect Service Resources** | Protect against resource exhaustion and session abuse with request limits and session separation. | `[RA-01]` Denial of service protection | Industrial IPS,<br>Industrial Security Switch |
+| **Restrict Unnecessary Functions and Ports** | Protect against unauthorized access and misuse with port/function blocking and whitelist policies. | `[RA-08]` Restriction of unneeded functionality, ports, and services<br>`[WS-21]` Restriction of external physical interfaces | Industrial IDS,<br>Industrial IPS |
+| **Communication Encryption** | Protect against data eavesdropping on network segments with transport layer encryption (e.g., TLS/SSH). | `[DP-01]` Confidentiality of information<br>`[DP-03]` Use of secure cryptographic mechanisms<br>`[WS-14]` Cryptographic adequacy<br>`[WS-09]` Wireless communication data protection | Security Chip,<br>Secure AP |
+| **Session Integrity Verification** | Protect against message replay attacks with sequence/Nonce-based verification. | `[SI-08]` Session integrity protection<br>`[WS-11]` Wireless communication replay attack prevention | |
+| **Authentication-based Routing** | Protect against unauthorized routing changes with user/device authentication-based control. | `[IA-01]` User identification and authentication<br>`[IA-02]` Device identification and authentication<br>`[DFR-01]` Network function support<br>`[DFR-02]` Protocol filtering | Industrial Firewall |
+| **Routing History Management** | Protect against routing manipulation and misuse with change logging and tracking. | `[UC-06]` Audit log generation<br>`[WS-17]` Log generation<br>`[WS-18]` Inclusion of time information | |
+| **Device Authentication** | Protect against control command transmission from unauthorized devices with device authentication. | `[IA-02]` Device identification and authentication | IoT Security Gateway |
+| **Enhanced Key Management** | Protect against key/certificate theft with secure storage (Security Chip/TPM) and periodic key rotation. | `[IA-04]` Public key management<br>`[WS-14]` Cryptographic adequacy<br>`[WS-16]` Cryptographic key uniqueness | Security Chip,<br>Board with TPM |
+| **Authenticator Protection** | Protect against authenticator exposure with access restrictions on sensitive information and immediate disposal. | `[IA-06]` Prevention of authenticator feedback<br>`[IA-11]` User authenticator management | Server Access Control Solution,<br>IoT Security Gateway |
