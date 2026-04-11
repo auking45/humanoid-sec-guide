@@ -21,21 +21,17 @@ nav:
   - Security Threats: threat_model.md
   - Security Solutions: security_solutions.md
   - 1. Hardware Security:
-      - Overview: hardware/overview.md
-      - TrustZone & TPM: hardware/trustzone_tpm.md
       - Requirements: hardware/requirements.md
+      - Specific Requirements: hardware/specific_requirements.md
   - 2. Network Security:
-      - Cloud (mTLS 1.3): network/cloud_comm.md
-      - Local Network (UPC-RPC): network/local_net.md
       - Requirements: network/requirements.md
+      - Specific Requirements: network/specific_requirements.md
   - 3. System SW Security:
-      - Real-time Auditing: system/audit_setup.md
-      - Secure Logging: system/logging.md
       - Requirements: system/requirements.md
+      - Specific Requirements: system/specific_requirements.md
   - 4. Application Security:
-      - Control Integrity: app/control_integrity.md
-      - Data Privacy: app/privacy.md
       - Requirements: app/requirements.md
+      - Specific Requirements: app/specific_requirements.md
   - Industrial Robot Security:
       - Overview: industrial/overview.md
       - Robot Control Panel: industrial/control_panel.md
@@ -73,18 +69,11 @@ plugins:
             Security Threats: 보안 위협
             Security Solutions: 보안 솔루션
             1. Hardware Security: 1. 하드웨어 보안
-            Overview: 개요
-            TrustZone & TPM: TrustZone 및 TPM
             Requirements: 보안 요구사항
+            Specific Requirements: 휴머노이드 특화 보안 요구사항
             2. Network Security: 2. 네트워크 보안
-            Cloud (mTLS 1.3): 클라우드 (mTLS 1.3)
-            Local Network (UPC-RPC): 로컬 네트워크 (UPC-RPC)
             3. System SW Security: 3. 시스템 SW 보안
-            Real-time Auditing: 실시간 감사
-            Secure Logging: 보안 로깅
             4. Application Security: 4. 애플리케이션 보안
-            Control Integrity: 제어 무결성
-            Data Privacy: 데이터 프라이버시
             Compliance Checklist: 컴플라이언스 체크리스트
             Industrial Robot Security: 산업용 로봇 보안
             Robot Control Panel: 로봇 제어반
