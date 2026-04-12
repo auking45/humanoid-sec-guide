@@ -22,6 +22,7 @@ usage() {
     echo "Commands:"
     echo "  setup-admin             Sets up SSH key-based login for the admin account and hardens security."
     echo "  add-dev                 Adds developer accounts from the config file."
+    echo "  delete-dev              Safely removes developer accounts from the config file for testing."
     echo "  harden-services         Disables common unnecessary network services (VNC, Samba, etc.)."
     echo "  setup-firewall [opts]   Installs and configures the UFW firewall."
     echo "  setup-auditd            Installs and configures the audit daemon (auditd)."
@@ -155,6 +156,51 @@ EOF
 
         echo "✨ Developer account '$dev_user' setup complete!"
         echo "   - You can now connect using: ssh -i $dev_key $dev_user@$RPC_IP"
+    done
+}
+
+# --- Command: delete-dev ---
+delete_dev_users() {
+    echo "🚀 Step: Starting to delete developer accounts from config..."
+
+    mapfile -t dev_users < <(jq -r '.users[]' "$CONFIG_FILE")
+
+    local keys_dir="$SCRIPT_DIR/.keys"
+    local admin_key="$keys_dir/id_rsa_rpc_admin"
+
+    if [ ! -f "$admin_key" ]; then
+        echo "❌ Error: Admin key ($admin_key) not found." >&2
+        exit 1
+    fi
+
+    for dev_user in "${dev_users[@]}"; do
+        echo "--- Processing user deletion: $dev_user ---"
+        
+        ssh -i "$admin_key" -t "$ADMIN_USER@$RPC_IP" sudo bash <<-EOF
+set -e
+DEV_USER="$dev_user"
+
+echo "--> 🗑️  Removing '\$DEV_USER' account..."
+if id "\$DEV_USER" &>/dev/null; then
+    killall -u "\$DEV_USER" || true
+    userdel -r "\$DEV_USER"
+    echo "Account '\$DEV_USER' has been deleted."
+else
+    echo "Account '\$DEV_USER' does not exist."
+fi
+
+echo "--> ⚙️  Updating SSH daemon configuration..."
+SSH_CONFIG=/etc/ssh/sshd_config
+if grep -q "^AllowUsers" \$SSH_CONFIG; then
+    CURRENT_USERS=\$(grep "^AllowUsers" \$SSH_CONFIG | sed "s/AllowUsers //")
+    NEW_USERS=\$(echo "\$CURRENT_USERS" | sed "s/\b\$DEV_USER\b//g" | tr -s ' ' | sed 's/^ *//;s/ *$//')
+    sed -i "s/^AllowUsers.*/AllowUsers \$NEW_USERS/" \$SSH_CONFIG
+fi
+systemctl restart ssh
+EOF
+
+        rm -f "$keys_dir/id_rsa_rpc_${dev_user}" "$keys_dir/id_rsa_rpc_${dev_user}.pub"
+        echo "✨ Developer account '$dev_user' deletion complete!"
     done
 }
 
@@ -401,6 +447,9 @@ main() {
             ;;
         add-dev)
             add_dev_users
+            ;;
+        delete-dev)
+            delete_dev_users
             ;;
         harden-services)
             harden_services

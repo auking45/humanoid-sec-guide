@@ -75,7 +75,19 @@
   ./robot_sec_setup.sh add-dev
   ```
 
-### 3. `setup-firewall`
+### 3. `delete-dev`
+config.json의 users 목록에 있는 개발자 계정을 서버에서 삭제함. 계정 생성 및 삭제 테스트 시 유용함.
+
+- **주요 기능**:
+  1.  원격 서버에서 사용자와 홈 디렉토리를 삭제함.
+  2.  SSH 설정의 AllowUsers 목록에서 해당 사용자를 제거함.
+  3.  로컬에 생성된 사용자의 SSH 키 페어를 삭제함.
+- **사용법**:
+  ```bash
+  ./robot_sec_setup.sh delete-dev
+  ```
+
+### 4. `setup-firewall`
 
 `config.json`의 `security.firewall` 설정에 따라 방화벽을 구성함.
 
@@ -88,7 +100,7 @@
   ./robot_sec_setup.sh setup-firewall
   ```
 
-### 4. `harden-services`
+### 5. `harden-services`
 
 `config.json`의 `security.harden_services` 설정에 따라 불필요한 네트워크 서비스를 비활성화함.
 
@@ -100,7 +112,7 @@
   ./robot_sec_setup.sh harden-services
   ```
 
-### 5. `setup-auditd`
+### 6. `setup-auditd`
 
 `config.json`의 `security.auditd` 설정에 따라 감사 데몬을 설치하고 설정함.
 
@@ -112,7 +124,7 @@
   ./robot_sec_setup.sh setup-auditd
   ```
 
-### 6. `harden-usb`
+### 7. `harden-usb`
 
 `config.json`의 `security.usb_hardening` 설정에 따라 USB 저장 장치를 차단함.
 

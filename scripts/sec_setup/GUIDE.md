@@ -74,7 +74,21 @@ After `setup-admin` is complete, this command adds all developer accounts from t
   ./robot_sec_setup.sh add-dev
   ```
 
-### 3. `setup-firewall [options]`
+### 3. `delete-dev`
+Removes developer accounts listed in config.json from the server. Useful for testing create/delete cycles.
+
+- **What it does**:
+
+  1.  Deletes the user and their home directory from the remote server.
+  2.  Removes the user from the AllowUsers list in the SSH configuration.
+  3.  Deletes the locally generated SSH key pair for the user.
+
+- **Usage**:
+  ```bash
+  ./robot_sec_setup.sh delete-dev
+  ```
+
+### 4. `setup-firewall [options]`
 
 Configures the firewall according to the `security.firewall` section in `config.json`.
 
@@ -87,7 +101,7 @@ Configures the firewall according to the `security.firewall` section in `config.
   ./robot_sec_setup.sh setup-firewall
   ```
 
-### 4. `harden-services`
+### 5. `harden-services`
 
 Disables unnecessary network services based on the `security.harden_services` section in `config.json`.
 
@@ -99,7 +113,7 @@ Disables unnecessary network services based on the `security.harden_services` se
   ./robot_sec_setup.sh harden-services
   ```
 
-### 5. `setup-auditd`
+### 6. `setup-auditd`
 
 Installs and configures the audit daemon based on the `security.auditd` section in `config.json`.
 
@@ -111,7 +125,7 @@ Installs and configures the audit daemon based on the `security.auditd` section 
   ./robot_sec_setup.sh setup-auditd
   ```
 
-### 6. `harden-usb`
+### 7. `harden-usb`
 
 Blocks USB storage devices based on the `security.usb_hardening` section in `config.json`.
 

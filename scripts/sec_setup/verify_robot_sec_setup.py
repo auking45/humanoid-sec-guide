@@ -332,6 +332,35 @@ def check_usb_hardening(host, admin_user, admin_key_path, usb_config):
     print_status(f"{label_prefix} 'usb-storage' module is not loaded", exit_status != 0)
 
 
+def check_users_deleted(host, admin_user, admin_key_path, dev_users):
+    """Verifies that the developer users have been completely removed."""
+    for user in dev_users:
+        print(f"\n🧪 {Color.YELLOW}Testing Deletion for user '{user}'...{Color.END}")
+
+        # 1. Check local keys
+        dev_key_path = os.path.join(KEYS_DIR, f"id_rsa_rpc_{user}")
+        pub_key_path = f"{dev_key_path}.pub"
+        keys_deleted = not os.path.exists(dev_key_path) and not os.path.exists(
+            pub_key_path
+        )
+        print_status(f"Local SSH keys for '{user}' deleted", keys_deleted)
+
+        # 2. Check remote user existence
+        stdout, _, exit_status = run_remote_command(
+            host, admin_user, admin_key_path, f"id {user}"
+        )
+        user_deleted = exit_status != 0  # id command should fail if user doesn't exist
+        print_status(f"Remote account '{user}' deleted", user_deleted)
+
+        # 3. Check SSH AllowUsers
+        cmd = f"grep '^AllowUsers' /etc/ssh/sshd_config | grep '\\b{user}\\b'"
+        stdout, _, exit_status = run_remote_command(
+            host, admin_user, admin_key_path, f"sudo {cmd}"
+        )
+        allowusers_deleted = exit_status != 0  # grep should fail to find the user
+        print_status(f"User '{user}' removed from AllowUsers", allowusers_deleted)
+
+
 def main():
     """Main function to parse arguments and run checks."""
     parser = argparse.ArgumentParser(
@@ -346,6 +375,11 @@ def main():
     parser.add_argument(
         "--output",
         help="Path to save the verification results as a JSON file.",
+    )
+    parser.add_argument(
+        "--verify-deleted",
+        action="store_true",
+        help="Verify that developer accounts have been successfully deleted.",
     )
 
     args = parser.parse_args()
@@ -389,6 +423,25 @@ def main():
             {"label": "Configuration Validation", "success": False, "message": msg}
         )
         save_results_and_exit(False)
+
+    if args.verify_deleted:
+        print(
+            f"\n🚀 {Color.BLUE}--- Starting Deletion Verification for Server: {ip} ---{Color.END}"
+        )
+        admin_key = os.path.join(KEYS_DIR, "id_rsa_rpc_admin")
+        if not os.path.exists(admin_key):
+            msg = f"Admin SSH key not found in '{KEYS_DIR}'"
+            print(f"❌ {Color.RED}Error: {msg}.{Color.END}")
+            RESULTS["checks"].append(
+                {"label": "Validate Admin SSH Key", "success": False, "message": msg}
+            )
+            save_results_and_exit(False)
+
+        check_users_deleted(ip, admin_user, admin_key, dev_users)
+        print(
+            f"\n🎉 {Color.GREEN}--- Deletion Verification Complete: All accounts removed! ---{Color.END}\n"
+        )
+        save_results_and_exit(True)
 
     print(
         f"\n🚀 {Color.BLUE}--- Starting Verification for Server: {ip} based on '{args.config}' ---{Color.END}"
