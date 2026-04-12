@@ -44,6 +44,24 @@
 2.  **설정 파일 수정**: `config.json` 파일을 열어 자신의 서버 환경에 맞게 `ip`, `admin_user`, `users` 등의 값을 수정함.
 3.  **명령어 순차 실행**: 아래 `명령어` 섹션에 설명된 명령어들을 순서대로 실행하여 서버를 설정함.
 
+## 다중 로봇 일괄 설정 (Batch Setup)
+
+여러 대의 로봇에 동일한 보안 설정을 한 번에 적용하려면 제공된 `batch_sec_setup.sh` 스크립트를 사용합니다.
+
+1. 로봇들의 IP 주소가 한 줄에 하나씩 적힌 텍스트 파일(예: `fleet_ips.txt`)을 생성합니다.
+   ```text
+   192.168.1.101
+   192.168.1.102
+   192.168.1.103
+   ```
+2. 기준이 되는 설정 파일과 IP 목록 파일을 지정하여 일괄 설정 스크립트를 실행합니다.
+   ```bash
+   chmod +x batch_sec_setup.sh
+   ./batch_sec_setup.sh config.json fleet_ips.txt
+   ```
+   _참고: `setup-admin` 단계에서 각 로봇의 초기 비밀번호 입력을 위해 프롬프트가 나타날 수 있습니다._
+   _실행이 완료되면 각 IP별로 검증 결과가 `verify_IP주소.json` 형태로 저장됩니다._
+
 ## 명령어
 
 모든 명령어는 별도의 인자 없이 실행되며, `config.json` 파일에서 모든 설정을 읽어옴.
@@ -76,6 +94,7 @@
   ```
 
 ### 3. `delete-dev`
+
 config.json의 users 목록에 있는 개발자 계정을 서버에서 삭제함. 계정 생성 및 삭제 테스트 시 유용함.
 
 - **주요 기능**:
@@ -176,4 +195,7 @@ pip install -r requirements.txt
 
 # 검증 결과를 JSON 파일로 저장
 ./verify_robot_sec_setup.py --output results.json
+
+# delete-dev 명령이 정상적으로 수행되었는지 검증 (계정 삭제 확인)
+./verify_robot_sec_setup.py --verify-deleted
 ```

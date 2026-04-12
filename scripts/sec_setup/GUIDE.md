@@ -44,6 +44,24 @@ All operations in this project revolve around the `config.json` file.
 2.  **Edit Config**: Open `config.json` and modify the values for `ip`, `admin_user`, `users`, etc., to match your target server environment.
 3.  **Run Commands Sequentially**: Execute the commands listed in the section below in order to provision the server.
 
+## Batch Setup for Multiple Robots
+
+To apply the same security configuration to multiple robots sequentially, you can use the provided `batch_sec_setup.sh` wrapper script.
+
+1. Create a text file (e.g., `fleet_ips.txt`) containing the IP addresses of your robots, one per line.
+   ```text
+   192.168.1.101
+   192.168.1.102
+   192.168.1.103
+   ```
+2. Run the batch setup script by providing the base configuration file and the IP list file.
+   ```bash
+   chmod +x batch_sec_setup.sh
+   ./batch_sec_setup.sh config.json fleet_ips.txt
+   ```
+   _Note: During the `setup-admin` step, you may be prompted to enter the initial password for each robot._
+   _Once completed, individual verification results will be saved as `verify_IP.json`._
+
 ## Commands
 
 All commands are run without arguments and read their settings from the `config.json` file.
@@ -75,10 +93,10 @@ After `setup-admin` is complete, this command adds all developer accounts from t
   ```
 
 ### 3. `delete-dev`
+
 Removes developer accounts listed in config.json from the server. Useful for testing create/delete cycles.
 
 - **What it does**:
-
   1.  Deletes the user and their home directory from the remote server.
   2.  Removes the user from the AllowUsers list in the SSH configuration.
   3.  Deletes the locally generated SSH key pair for the user.
@@ -177,4 +195,7 @@ The verification script uses the `config.json` file to run its checks.
 
 # Run verification and save the results to a JSON file
 ./verify_robot_sec_setup.py --output results.json
+
+# Verify that developer accounts were successfully deleted after running delete-dev
+./verify_robot_sec_setup.py --verify-deleted
 ```
